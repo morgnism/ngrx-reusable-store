@@ -27,10 +27,13 @@ export type PhotosState = PhotoTypeState & {
  *
  * NOTE: we have to assign an initial value in this
  * example's load strategy so our selector doesn't read
- * the state as`undefined`.
+ * the state as `undefined`.
  *
  * Because we used an indexed type, we would have to
  * force type properties to `any` to avoid type conflicts.
+ *
+ * To get around an initial value and use `null`, change
+ * your load to one that makes sense for yout app.
  */
 export const INITIAL_PHOTOS_STATE: PhotosState = {
   selectedPhotoType: PhotoType.Promos as any,
