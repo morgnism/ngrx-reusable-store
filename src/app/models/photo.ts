@@ -11,10 +11,10 @@ export interface Photo {
 }
 
 export enum PhotoType {
-  PROMOS = 'Promos',
-  WALLPAPERS = 'Wallpapers',
-  PEOPLE = 'People',
-  NATURE = 'Nature',
-  ARCHITECTURE = 'Architecture',
-  MISC = 'Misc',
+  Promos = 'Promos',
+  Wallpapers = 'Wallpapers',
+  People = 'People',
+  Nature = 'Nature',
+  Architecture = 'Architecture',
+  Misc = 'Misc',
 }

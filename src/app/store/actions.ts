@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Photo } from '../models/photo';
+import { Photo, PhotoType } from '../models/photo';
 
 export const loadPhoto = createAction('[FEATURE] Load Photo');
 
@@ -11,4 +11,9 @@ export const loadPhotoSuccess = createAction(
 export const loadPhotoFailed = createAction(
   '[FEATURE] Load Photo Failed',
   props<{ error: any }>()
+);
+
+export const setActivePhotoType = createAction(
+  '[FEATURE] Set Active Photo Type',
+  props<{ photoType: PhotoType }>()
 );

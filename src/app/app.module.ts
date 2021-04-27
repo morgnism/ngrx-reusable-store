@@ -6,16 +6,15 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
-import { photosReducer } from './store/reducer';
 import { EffectsModule } from '@ngrx/effects';
-import { PhotoEffects } from './store/effects';
+import { photosReducer, PhotoEffects } from './store';
 
 @NgModule({
   declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    StoreModule.forRoot({ assets: photosReducer }),
+    StoreModule.forRoot({ photos: photosReducer }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,

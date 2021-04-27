@@ -3,7 +3,7 @@ import { Photo } from '../models/photo';
 export const PromosWithOtherPhotos: Photo[] = [
   {
     id: 1,
-    name: 'Some promo',
+    name: 'Some promo 1',
     scr: 'an image source',
     created_at: 'some date',
     updated_at: 'some date',
@@ -15,7 +15,7 @@ export const PromosWithOtherPhotos: Photo[] = [
   },
   {
     id: 1,
-    name: 'Some promo',
+    name: 'Some promo 2',
     scr: 'an image source',
     created_at: 'some date',
     updated_at: 'some date',
@@ -27,7 +27,7 @@ export const PromosWithOtherPhotos: Photo[] = [
   },
   {
     id: 2,
-    name: 'Some photo',
+    name: 'Some photo 3',
     scr: 'an image source',
     created_at: 'some date',
     updated_at: 'some date',
@@ -39,7 +39,7 @@ export const PromosWithOtherPhotos: Photo[] = [
   },
   {
     id: 3,
-    name: 'Some promo',
+    name: 'Some promo 4',
     scr: 'an image source',
     created_at: 'some date',
     updated_at: 'some date',
@@ -51,7 +51,7 @@ export const PromosWithOtherPhotos: Photo[] = [
   },
   {
     id: 4,
-    name: 'Some promo',
+    name: 'Some promo 5',
     scr: 'an image source',
     created_at: 'some date',
     updated_at: 'some date',
@@ -63,7 +63,7 @@ export const PromosWithOtherPhotos: Photo[] = [
   },
   {
     id: 5,
-    name: 'Some photo',
+    name: 'Some photo 6',
     scr: 'an image source',
     created_at: 'some date',
     updated_at: 'some date',
