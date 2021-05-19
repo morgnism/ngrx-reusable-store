@@ -8,7 +8,7 @@ export interface TopicsState extends EntityState<Topic> {
   isLoading: boolean;
 }
 
-export const adapter: EntityAdapter<Topic> = createEntityAdapter<Topic>({});
+const adapter: EntityAdapter<Topic> = createEntityAdapter<Topic>({});
 
 export const INITIAL_TOPICS_STATE: TopicsState = adapter.getInitialState({
   isLoaded: false,

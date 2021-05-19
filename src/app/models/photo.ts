@@ -1,6 +1,11 @@
 import { ImageUrls } from './image-urls';
 import { User } from './user';
 
+export type People = Photo;
+export type Nature = Photo;
+export type Architecture = Photo;
+export type Fashion = Photo;
+export type Wallpapers = Photo;
 export interface Photo {
   alt_description: string;
   blur_hash: string;

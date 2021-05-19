@@ -12,14 +12,35 @@ import * as fromStore from './store';
 export class AppComponent implements OnInit {
   photos$: Observable<Photo[]>;
 
-  constructor(private store: Store<fromStore.PhotosState>) {}
+  constructor(private store: Store<fromStore.ApplicationState>) {}
 
   ngOnInit() {
     this.store.dispatch(fromStore.loadTopics());
-    this.photos$ = this.store.select(fromStore.selectAllPhotos);
+    this.photos$ = this.store.select(fromStore.selectAllPeoplePhotos);
   }
 
   handleActivePhtotoTypeChange(photoType: PhotoType) {
-    this.store.dispatch(fromStore.setActivePhotoType({ photoType }));
+    switch (photoType) {
+      case PhotoType.Nature:
+        this.store.dispatch(fromStore.loadNaturePhotos());
+        this.photos$ = this.store.select(fromStore.selectAllNaturePhotos);
+        break;
+      case PhotoType.Architecture:
+        this.store.dispatch(fromStore.loadArchitecturePhotos());
+        this.photos$ = this.store.select(fromStore.selectAllArchitecturePhotos);
+        break;
+      case PhotoType.Fashion:
+        this.store.dispatch(fromStore.loadFashionPhotos());
+        this.photos$ = this.store.select(fromStore.selectAllFashionPhotos);
+        break;
+      case PhotoType.Wallpapers:
+        this.store.dispatch(fromStore.loadWallpapersPhotos());
+        this.photos$ = this.store.select(fromStore.selectAllWallpapersPhotos);
+        break;
+      default:
+        this.store.dispatch(fromStore.loadPeoplePhotos());
+        this.photos$ = this.store.select(fromStore.selectAllPeoplePhotos);
+        break;
+    }
   }
 }

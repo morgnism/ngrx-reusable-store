@@ -8,7 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { EffectsModule } from '@ngrx/effects';
-import { PhotoEffects, TopicsEffects, reducers, metaReducers } from './store';
+import { reducers, metaReducers, effects } from './store';
 import { TokenInterceptor } from './token.interceptor';
 import { ActionButtonBarComponent } from './action-button-bar/action-button-bar.component';
 
@@ -23,7 +23,7 @@ import { ActionButtonBarComponent } from './action-button-bar/action-button-bar.
       maxAge: 25,
       logOnly: environment.production,
     }),
-    EffectsModule.forRoot([PhotoEffects, TopicsEffects]),
+    EffectsModule.forRoot(effects),
   ],
   providers: [
     {

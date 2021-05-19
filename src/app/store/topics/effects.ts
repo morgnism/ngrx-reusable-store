@@ -3,8 +3,8 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import * as TopicsActions from './actions';
 import { EMPTY, of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
-import { PhotosService } from 'src/app/data/photos.service';
 import { Topic } from 'src/app/models/topics';
+import { TopicsService } from 'src/app/data/topics.service';
 
 @Injectable({ providedIn: 'root' })
 export class TopicsEffects {
@@ -12,7 +12,7 @@ export class TopicsEffects {
     this.actions$.pipe(
       ofType(TopicsActions.loadTopics),
       switchMap(() =>
-        this.photosService.getTopics().pipe(
+        this.topicsService.getTopics().pipe(
           map((topics: Topic[]) => TopicsActions.loadTopicsSuccess({ topics })),
           catchError(() => EMPTY)
         )
@@ -22,6 +22,6 @@ export class TopicsEffects {
 
   constructor(
     private actions$: Actions,
-    private photosService: PhotosService
+    private topicsService: TopicsService
   ) {}
 }
