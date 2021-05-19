@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { Photo, PhotoType } from '../models/photo';
+import { Photo, PhotoType } from '../../models/photo';
 import * as PhotoActions from './actions';
 
 export interface PhotoState {
@@ -8,9 +8,17 @@ export interface PhotoState {
   isLoading: boolean;
 }
 export interface PhotoTypeState {
-  [assetType: string]: PhotoState;
+  [photoType: string]: PhotoState;
 }
 
+/**
+ * Creates the initial persisted state:
+ * {
+ *  People: [],
+ *  Nature: [],
+ *  ...
+ * }
+ */
 export const INITIAL_PHOTO_TYPE_STATES: PhotoTypeState = Object.keys(
   PhotoType
 ).reduce((acc, val) => {
@@ -36,7 +44,7 @@ export type PhotosState = PhotoTypeState & {
  * your load to one that makes sense for yout app.
  */
 export const INITIAL_PHOTOS_STATE: PhotosState = {
-  selectedPhotoType: PhotoType.Promos as any,
+  selectedPhotoType: PhotoType.People as any,
   ...INITIAL_PHOTO_TYPE_STATES,
 };
 
@@ -47,6 +55,12 @@ export const photosReducer = createReducer(
     [state.selectedPhotoType]: {
       ...state[state.selectedPhotoType],
       photos,
+      isLoaded: true,
+      isLoading: false,
     },
+  })),
+  on(PhotoActions.setActivePhotoType, (state, { photoType }) => ({
+    ...state,
+    selectedPhotoType: photoType as any,
   }))
 );
