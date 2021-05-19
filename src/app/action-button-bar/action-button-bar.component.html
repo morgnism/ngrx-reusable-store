@@ -1,0 +1,5 @@
+<div class="flex flex-grow items-center justify-between p-5 border-b-2">
+  <button *ngFor="let item of menuItems" (click)="handleTypeChangeClick(item)">
+    {{ item }}
+  </button>
+</div>

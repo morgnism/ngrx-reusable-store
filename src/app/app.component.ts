@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Photo } from './models/photo';
+import { Photo, PhotoType } from './models/photo';
 import * as fromStore from './store';
 
 @Component({
@@ -10,14 +10,16 @@ import * as fromStore from './store';
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent implements OnInit {
-  title = 'ngrx-reusable-store';
-
   photos$: Observable<Photo[]>;
 
   constructor(private store: Store<fromStore.PhotosState>) {}
 
   ngOnInit() {
-    this.store.dispatch(fromStore.loadPhoto());
+    this.store.dispatch(fromStore.loadTopics());
     this.photos$ = this.store.select(fromStore.selectAllPhotos);
+  }
+
+  handleActivePhtotoTypeChange(photoType: PhotoType) {
+    this.store.dispatch(fromStore.setActivePhotoType({ photoType }));
   }
 }

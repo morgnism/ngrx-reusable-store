@@ -1,4 +1,14 @@
-<div *ngFor="let photo of photos$ | async">
-  <p>{{ photo.name }}</p>
-  <p>{{ photo.created_at }}</p>
-</div>
+<app-action-button-bar
+  (changeActiveType)="handleActivePhtotoTypeChange($event)"
+></app-action-button-bar>
+
+<section
+  *ngIf="photos$ | async; else loading"
+  class="grid grid-cols-3 gap-4 m-5"
+>
+  <div *ngFor="let photo of photos$ | async">
+    <img [src]="photo.urls.thumb" [alt]="photo.alt_description" />
+  </div>
+</section>
+
+<ng-template #loading><div class="m-5">Loading...</div></ng-template>

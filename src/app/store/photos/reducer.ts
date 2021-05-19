@@ -1,20 +1,34 @@
+import { createEntityAdapter, EntityAdapter, EntityState } from '@ngrx/entity';
 import { createReducer, on } from '@ngrx/store';
-import { Photo, PhotoType } from '../models/photo';
+import { Photo, PhotoType } from '../../models/photo';
 import * as PhotoActions from './actions';
 
-export interface PhotoState {
-  photos: Photo[];
+export interface PhotoState extends EntityState<Photo> {
   isLoaded: boolean;
   isLoading: boolean;
 }
 export interface PhotoTypeState {
-  [assetType: string]: PhotoState;
+  [photoType: string]: PhotoState;
 }
 
+const adapter: EntityAdapter<Photo> = createEntityAdapter({});
+
+/**
+ * Creates the initial persisted state:
+ * {
+ *  People: [],
+ *  Nature: [],
+ *  ...
+ * }
+ */
 export const INITIAL_PHOTO_TYPE_STATES: PhotoTypeState = Object.keys(
   PhotoType
 ).reduce((acc, val) => {
-  acc[PhotoType[val]] = [];
+  const state = adapter.getInitialState({
+    isLoaded: false,
+    isLoading: false,
+  });
+  acc[PhotoType[val]] = state;
   return acc;
 }, {});
 
@@ -36,7 +50,7 @@ export type PhotosState = PhotoTypeState & {
  * your load to one that makes sense for yout app.
  */
 export const INITIAL_PHOTOS_STATE: PhotosState = {
-  selectedPhotoType: PhotoType.Promos as any,
+  selectedPhotoType: PhotoType.People as any,
   ...INITIAL_PHOTO_TYPE_STATES,
 };
 
@@ -44,9 +58,19 @@ export const photosReducer = createReducer(
   INITIAL_PHOTOS_STATE,
   on(PhotoActions.loadPhotoSuccess, (state, { photos }) => ({
     ...state,
-    [state.selectedPhotoType]: {
+    [state.selectedPhotoType]: adapter.setAll(photos, {
       ...state[state.selectedPhotoType],
-      photos,
-    },
+      isLoaded: true,
+      isLoading: true,
+    }),
+  })),
+  on(PhotoActions.setActivePhotoType, (state, { photoType }) => ({
+    ...state,
+    selectedPhotoType: photoType as any,
   }))
 );
+
+export const { selectAll } = adapter.getSelectors();
+
+// select an array of photos from the active photo type
+export const selectAllActivePhotos = selectAll;

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { Photo, PhotoType } from '../models/photo';
+import { Photo, PhotoType } from '../../models/photo';
 
 export const loadPhoto = createAction('[FEATURE] Load Photo');
 

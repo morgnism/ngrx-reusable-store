@@ -1,20 +1,31 @@
+import { ImageUrls } from './image-urls';
 import { User } from './user';
 
 export interface Photo {
-  id: string | number;
-  name: string;
-  scr: string;
+  alt_description: string;
+  blur_hash: string;
+  categories: [];
+  color: string;
   created_at: string;
-  updated_at: string;
+  current_user_collections: [];
+  description: null;
+  height: number;
+  id: string;
+  liked_by_user: boolean;
   likes: number;
+  links: ImageUrls;
+  promoted_at: null;
+  sponsorship: null;
+  updated_at: string;
+  urls: ImageUrls;
   user: User;
+  width: number;
 }
 
 export enum PhotoType {
-  Promos = 'Promos',
-  Wallpapers = 'Wallpapers',
-  People = 'People',
-  Nature = 'Nature',
-  Architecture = 'Architecture',
-  Misc = 'Misc',
+  People = 'people',
+  Nature = 'nature',
+  Architecture = 'architecture',
+  Fashion = 'fashion',
+  Wallpapers = 'wallpapers',
 }
