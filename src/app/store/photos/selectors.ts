@@ -1,5 +1,5 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
-import { PhotosState } from './reducer';
+import { PhotosState, selectAllActivePhotos } from './reducer';
 
 export const photosState = createFeatureSelector<PhotosState>('photos');
 
@@ -16,7 +16,7 @@ export const selectActivePhotoTypeState = createSelector(
 
 export const selectAllPhotos = createSelector(
   selectActivePhotoTypeState,
-  (state) => state.photos
+  selectAllActivePhotos
 );
 
 export const selectPhotosLoadedStatus = createSelector(
